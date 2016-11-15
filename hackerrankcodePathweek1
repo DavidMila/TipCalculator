@@ -1,0 +1,40 @@
+# Complete the function below.
+
+
+def  longestSubsequence(x, y):
+    temp = []
+    lengths =[]
+    pos = len(y) - 1
+    bus = y
+    tempBus = bus
+    for p in range(len(bus)):
+        for i in range(len(x)):
+            if tempBus == x[i:len(tempBus)]:
+                temp.append(tempBus)
+        pos-= 1
+        tempBus = bus[0:pos]
+    for c in temp:
+        for i in range(len(c),len(x)):
+            if (c + x[i]) in y:
+                c += x[i]
+                
+    for i in temp:
+        lengths.append(len(i))
+    return max(lengths)             
+        
+
+def  maxLength(a, k):
+    currentMaxLength = 0
+    temp = []
+    pos = 1
+    for i in range(len(a)):
+        pos = i+1
+        temp = []
+        temp.append(a[i])
+        while(pos < len(a)):           
+            if sum([sum(temp),a[pos]]) <= k:
+                temp.append(a[pos])
+            pos +=1
+        if (len(temp) > currentMaxLength):
+            currentMaxLength = len(temp) 
+    return currentMaxLength
